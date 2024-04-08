@@ -5,7 +5,7 @@ from datetime import datetime
 
 fake = Faker('pl_PL')
 
-def generate_gabinet_hurtownia_data():
+def generate_gabinet_hurtownia_data(ilosc_rekordow):
     with open('gabinet_hurtownia.csv', mode='w', newline='') as file:
         nr_gabinetu = [1,2,3,4,5,6,7,8,9,10]
         specjalizacje = [
@@ -20,12 +20,12 @@ def generate_gabinet_hurtownia_data():
 
         writer = csv.writer(file)
         writer.writerow(['gabinetid', 'numergabinetu', 'specjalizacja'])
-        for i in range(10):
+        for i in range(ilosc_rekordow):
             writer.writerow([nr_gabinetu[i], 
             str(nr_gabinetu[i]), 
             str(random.choice(specjalizacje))])
 
-def generate_pacjent_hurtownia_data():
+def generate_pacjent_hurtownia_data(ilosc_rekordow):
     with open('pacjent_hurtownia.csv', mode='w', newline='') as file:
         pacjent_id = [x for x in range(1,200+1)]
         imiona = generate_random_name(200)
@@ -39,11 +39,11 @@ def generate_pacjent_hurtownia_data():
 
         writer = csv.writer(file)
         writer.writerow(['pacjentid', 'imie', 'nazwisko', 'dataurodzenia', 'plec', 'numertelefonu', 'ulica', 'miejscowosc', 'nr_mieszkania'])
-        for i in range(200):
+        for i in range(ilosc_rekordow):
             writer.writerow([pacjent_id[i], str(imiona[i]), str(nazwiska[i]), daty[i], 
                              random.choice(['M', 'K']), str(numery_telefonu[i]), str(ulice[i]), str(miasta[i]), str(random.randint(1, 150))])
 
-def generate_pracownik_hurtownia_data():
+def generate_pracownik_hurtownia_data(ilosc_rekordow):
     with open('pracownik_hurtownia.csv', mode='w', newline='') as file:
         pracownik_id = [x for x in range(1,30+1)]
         imiona = generate_random_name(30)
@@ -58,11 +58,11 @@ def generate_pracownik_hurtownia_data():
 
         writer = csv.writer(file)
         writer.writerow(['pracownikid', 'imie', 'nazwisko', 'stanowisko', 'datazatrudnienia', 'numertelefonu', 'ulica', 'miejscowosc', 'nr_mieszkania'])
-        for i in range(30):
+        for i in range(ilosc_rekordow):
             writer.writerow([pracownik_id[i], str(imiona[i]), str(nazwiska[i]), str(stanowiska[i]), daty[i], 
                              numery_telefonu[i], str(ulice[i]), str(miasta[i]), str(random.randint(1, 150))])
 
-def generate_recepta_hurtownia_data():
+def generate_recepta_hurtownia_data(ilosc_rekordow):
     with open('recepta_hurtownia.csv', mode='w', newline='') as file:
         id_recepty = [x for x in range(1,751)]
         pacjent_id = [x for x in range(1,200+1)]
@@ -76,13 +76,13 @@ def generate_recepta_hurtownia_data():
 
         writer = csv.writer(file)
         writer.writerow(['receptaid', 'pacjentid', 'pracownikid', 'datawystawienia', 'opisleku', 'dawkowanie', 'okreswaznosci'])
-        for i in range(750):
+        for i in range(ilosc_rekordow):
             writer.writerow([id_recepty[i], random.choice(pacjent_id), random.choice(pracownik_id), daty_recepty[i], 
                             str(opis_leku[i]),
                             str(dawkowanie[i]),
                             okreswaznosci[i]])
 
-def generate_wizyta_hurtownia_data():
+def generate_wizyta_hurtownia_data(ilosc_rekordow):
     with open('wizyta_hurtownia.csv', mode='w', newline='') as file:
         wizyta_id = [x for x in range(1,1001)]
         pacjent_id = [x for x in range(1,200+1)]
@@ -94,7 +94,7 @@ def generate_wizyta_hurtownia_data():
         godzina_wizyty = generate_random_visit_time(1000)
         writer = csv.writer(file)
         writer.writerow(['wizytaid', 'pacjentid', 'pracownikid', 'gabinetid', 'datawizyty', 'godzinawizyty'])
-        for i in range(1000):
+        for i in range(ilosc_rekordow):
             writer.writerow([wizyta_id[i], 
             random.choice(pacjent_id), 
             random.choice(pracownik_id), 
@@ -102,7 +102,7 @@ def generate_wizyta_hurtownia_data():
             daty_wizyty[i], 
             godzina_wizyty[i]])
 
-def generate_badania_hurtownia_data():
+def generate_badania_hurtownia_data(ilosc_rekordow):
     with open('badania_hurtownia.csv', mode='w', newline='') as file:
         badania_id = [x for x in range(1,301)]
         pacjent_id = [x for x in range(1,200+1)]
@@ -114,10 +114,10 @@ def generate_badania_hurtownia_data():
         rodzajBadania = generate_medical_examination_type(300)
         writer = csv.writer(file)
         writer.writerow(['badanieID', 'pacjentID', 'opisWyniku', 'pracownikID', 'dataWykonania', 'rodzajBadania'])
-        for i in range(300):
+        for i in range(ilosc_rekordow):
             writer.writerow([badania_id[i], random.choice(pacjent_id), opisWyniku[i], random.choice(pracownik_id), daty_badania[i], rodzajBadania[i]])
 
-def generate_siec_hurtowania_data():
+def generate_siec_hurtowania_data(ilosc_rekordow):
     with open('siec_hurtownia.csv', mode='w', newline='') as file:
         wizyta_id = [x for x in range(1,1001)]
         pacjent_id = [x for x in range(1,200+1)]
@@ -127,7 +127,7 @@ def generate_siec_hurtowania_data():
         badania_id = [x for x in range(1,301)]
         writer = csv.writer(file)
         writer.writerow(['pacjentid', 'pracownikid', 'gabinetid', 'receptaid', 'badaniaid', 'wizytaid'])
-        for _ in range(1000):
+        for _ in range(ilosc_rekordow):
             writer.writerow([random.choice(pacjent_id), random.choice(pracownik_id), random.choice(nr_gabinetu), random.choice(id_recepty), 
                              random.choice(badania_id), random.choice(wizyta_id)])
 
@@ -364,10 +364,10 @@ def replace_polish_characters(text):
 
 
 #Odpalamy funkcje do generowania plikow
-generate_gabinet_hurtownia_data()
-generate_pacjent_hurtownia_data()
-generate_pracownik_hurtownia_data()
-generate_recepta_hurtownia_data()
-generate_wizyta_hurtownia_data()
-generate_badania_hurtownia_data()
-generate_siec_hurtowania_data()
+generate_gabinet_hurtownia_data(10)
+generate_pacjent_hurtownia_data(200)
+generate_pracownik_hurtownia_data(30)
+generate_recepta_hurtownia_data(750)
+generate_wizyta_hurtownia_data(1000)
+generate_badania_hurtownia_data(300)
+generate_siec_hurtowania_data(1000)
