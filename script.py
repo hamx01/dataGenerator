@@ -119,12 +119,12 @@ def generate_badania_hurtownia_data(ilosc_rekordow):
 
 def generate_siec_hurtowania_data(ilosc_rekordow):
     with open('siec_hurtownia.csv', mode='w', newline='') as file:
-        wizyta_id = [x for x in range(1,1001)]
         pacjent_id = [x for x in range(1,200+1)]
         pracownik_id = [x for x in range(1,30+1)]
-        id_recepty = [x for x in range(1,751)]
         nr_gabinetu = [1,2,3,4,5,6,7,8,9,10]
+        id_recepty = [x for x in range(1,751)]
         badania_id = [x for x in range(1,301)]
+        wizyta_id = [x for x in range(1,1001)]
         writer = csv.writer(file)
         writer.writerow(['pacjentid', 'pracownikid', 'gabinetid', 'receptaid', 'badaniaid', 'wizytaid'])
         for _ in range(ilosc_rekordow):
@@ -370,4 +370,4 @@ generate_pracownik_hurtownia_data(30)
 generate_recepta_hurtownia_data(750)
 generate_wizyta_hurtownia_data(1000)
 generate_badania_hurtownia_data(300)
-generate_siec_hurtowania_data(1000)
+generate_siec_hurtowania_data(10000)
